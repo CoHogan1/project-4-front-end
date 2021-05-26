@@ -113,39 +113,46 @@ export default class App extends Component {
 
                 <Chat />
 
-                    <div className='loginForm'>
-                <h1>Login</h1>
-                <form className="forms" onSubmit={this.onLoginSubmit}>
-                    <label>Email:</label>
-                    <input onChange={this.handleChange} name='email' ></input>
-                    <br></br>
-                    <label>Username:</label>
-                    <input name='username' onChange={this.handleChange} ></input>
-                    <br></br>
-                    <label>Password:</label>
-                    <input name='password' onChange={this.handleChange} type='password'></input>
-                    <br></br>
-                    <input className="submit" type='submit' value='Login'></input>
-                </form>
-            </div>
+               <div className="allForms">
 
-            <div className="spacer"></div>
+                <div className='loginForm'>
+                    <h1>Login</h1>
+                    <form className="forms" onSubmit={this.onLoginSubmit}>
+                        <label>Email:</label>
+                        <input onChange={this.handleChange} name='email' ></input>
+                        <br></br>
+                        <label>Username:</label>
+                        <input name='username' onChange={this.handleChange} ></input>
+                        <br></br>
+                        <label>Password:</label>
+                        <input name='password' onChange={this.handleChange} type='password'></input>
+                        <br></br>
+                        <div className="s">
+                        <input className="submit" type='submit' value='Login'></input>
+                        </div>
+                    </form>
+                </div>
 
-            <div className='newUserForm'>
-            <h1>Create User</h1>
-                <form className="forms" onSubmit={this.newUserSubmit}>
-                    <label>Email:</label>
-                    <input onChange={this.handleChange} name='email' value={this.state.email} ></input>
-                    <br></br>
-                    <label>Username:</label>
-                    <input onChange={this.handleChange} name='username'  ></input>
-                    <br></br>
-                    <label>Password:</label>
-                    <input onChange={this.handleChange} name='password' type='password'  ></input>
-                    <br></br>
-                    <input className="submit" type='submit' value='Create'></input>
-                </form>
-            </div>
+                <div className="spacer"></div>
+
+                <div className='newUserForm'>
+                <h1>Create User</h1>
+                    <form className="forms" onSubmit={this.newUserSubmit}>
+                        <label>Email:</label>
+                        <input onChange={this.handleChange} name='email' value={this.state.email} ></input>
+                        <br></br>
+                        <label>Username:</label>
+                        <input onChange={this.handleChange} name='username'  ></input>
+                        <br></br>
+                        <label>Password:</label>
+                        <input onChange={this.handleChange} name='password' type='password'  ></input>
+                        <br></br>
+                        <div className="s">
+                        <input className="submit" type='submit' value='Create'></input>
+                        </div>
+                    </form>
+                </div>
+                </div>
 
             </div>
         )

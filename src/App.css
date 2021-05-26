@@ -1,7 +1,9 @@
 .App {
-  text-align: center;
-  margin: auto;
+    text-align: center;
+    margin: auto;
+
 }
+
 
 
 
@@ -17,6 +19,7 @@
     background-color: rgba(50, 50, 50, 0.5);
     max-height: 150px;
     overflow: scroll;
+    overflow-x: hidden;
 }
 .text {
     background-color: rgba(255, 255, 255, 0.5);
@@ -42,10 +45,10 @@
 }
 
 
+
+
 .board-container {
     margin-bottom: 30px;
-
-
 }
 .extra {
     margin: auto;
@@ -76,22 +79,73 @@
     width: 60px;
 }
 
+
+
+
+
 /* Scrollbar styles */
 ::-webkit-scrollbar {
 width: 12px;
 height: 12px;
 }
 
+/* scrolllbar border */
 ::-webkit-scrollbar-track {
 border: 1px solid black;
 border-radius: 10px;
 }
 
+/* scroll bar  */
 ::-webkit-scrollbar-thumb {
-background: red;
+background: cyan;
 border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-background: darkred;
+background: blue;
+}
+
+.allForms{
+
+}
+.forms {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.forms input {
+    width: 300px;
+    margin: 5px;
+}
+.forms label {
+    width: 100px;
+}
+.submit {
+    max-width: 55px;
+    margin:auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+/* center submit fields */
+.s {
+    margin: auto;
+    width: 100px;
+}
+
+
+.loginForm {
+    width: 500px;
+    height: 220px;
+    background-color: lightblue;
+    border-radius: 5px;
+    border: 3px solid blue;
+    margin-bottom: 20px;
+}
+
+.newUserForm {
+    width: 500px;
+    background-color: lime;
+    border-radius: 5px;
+    border: 3px solid green;
 }
