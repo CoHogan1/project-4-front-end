@@ -10,7 +10,7 @@ const socket = io.connect(ENDPOINT)
 
 
 const Chat = () => {
-    const [messages, setMessages] = useState(["Hi"])
+    const [messages, setMessages] = useState(["~~Chat with your opponent~~"])
     const [message, setMessage] = useState('')
     let counter = useState(1)
 
@@ -38,18 +38,22 @@ const Chat = () => {
     }
 
     return (
-        <div className="App">
-            <h1>Hello</h1>
+        <div className="chat">
+
+            <div className="chatbox">
             {messages.length > 0 &&
             messages.map(msg => (
-                <div>
-                  <p id={counter}>{msg} {counter}</p>
+                <div className="text">
+                  <p id={counter}>{msg}</p>
                 </div>
                 ))}
+            </div>
 
-            <label>Chat:</label>
+            <div className="chat-controls">
             <input value={message} name="message" onChange={e => onChange(e)}/>
             <button onClick={()=> onClick()}>Send</button>
+            </div>
+            
         </div>
     )
 }

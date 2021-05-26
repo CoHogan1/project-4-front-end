@@ -1,7 +1,8 @@
 import './App.css';
 import React, { Component } from 'react'
-import io from 'socket.io-client'
+//import io from 'socket.io-client'
 import Chat from './chat'
+import Board from './board'
 
 
 
@@ -107,7 +108,8 @@ export default class App extends Component {
     render() {
         return (
             <div className="App">
-                <h1>Please Login To Play Checkers</h1>
+                <h1>Checkers</h1>
+                <Board />
 
                 <Chat />
 
