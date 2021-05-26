@@ -1,7 +1,6 @@
 .App {
     text-align: center;
     margin: auto;
-
 }
 
 
@@ -46,23 +45,9 @@
 
 
 
-
+/* game baord------------------------------------ */
 .board-container {
-    margin-bottom: 30px;
-}
-.extra {
-    margin: auto;
-    width: 500px;
-}
-.inside-extra {
-    border: 3px solid grey;
-    width: 480px;
-}
-
-.row {
-    display: flex;
-    flex-direction: row;
-    line-height: 60px;
+    margin-left: 25%;
 }
 
 .black {
@@ -74,7 +59,7 @@
     margin: 1px;
 }
 
-.white {
+.red {
     background-color: red;
     color: black;
     height: 60px;
@@ -82,11 +67,42 @@
     margin: 1px;
 }
 
+/* game peices */
+
+.player1 {
+    background-color: red;
+    border-radius: 50%;
+    border: 2px solid white;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    margin: 4px;
+}
+
+.player2 {
+    background-color: slategrey;
+    border-radius: 50%;
+    border: 2px solid white;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    color: white;
+    margin: 4px;
+}
+
+
+.board {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 500px;
+}
 
 
 
 
-/* Scrollbar styles */
+
+/* Scrollbar styles ===========================*/
 ::-webkit-scrollbar {
 width: 12px;
 height: 12px;
@@ -151,28 +167,4 @@ background: blue;
     background-color: lime;
     border-radius: 5px;
     border: 3px solid green;
-}
-
-
-/* game peices */
-
-.player1 {
-    background-color: red;
-    border-radius: 50%;
-    border: 2px solid white;
-    width: 45px;
-    height: 45px;
-    line-height: 45px;
-    margin: 4px;
-}
-
-.player2 {
-    background-color: slategrey;
-    border-radius: 50%;
-    border: 2px solid white;
-    width: 45px;
-    height: 45px;
-    line-height: 45px;
-    color: white;
-    margin: 4px;
 }
