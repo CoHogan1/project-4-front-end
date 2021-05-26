@@ -69,14 +69,17 @@
     background-color: black;
     height: 60px;
     width: 60px;
-    color: white;
+    text-align: center;
+    color: red;
+    margin: 1px;
 }
 
 .white {
-    background-color: white;
+    background-color: red;
     color: black;
     height: 60px;
     width: 60px;
+    margin: 1px;
 }
 
 
@@ -148,4 +151,28 @@ background: blue;
     background-color: lime;
     border-radius: 5px;
     border: 3px solid green;
+}
+
+
+/* game peices */
+
+.player1 {
+    background-color: red;
+    border-radius: 50%;
+    border: 2px solid white;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    margin: 4px;
+}
+
+.player2 {
+    background-color: slategrey;
+    border-radius: 50%;
+    border: 2px solid white;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    color: white;
+    margin: 4px;
 }

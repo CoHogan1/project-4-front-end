@@ -14,15 +14,16 @@ const Chat = () => {
     const [message, setMessage] = useState('')
     let counter = useState(1)
 
-    useEffect(()=>{
-        getMessages()
-    }, [messages.length])
-
     const getMessages = () => {
         socket.on('message', msg => {
             setMessages([...messages, msg])
         })
     }
+    
+    useEffect(()=>{
+        getMessages()
+    }, [messages.length])
+
 
     const onChange = e => { // this may not need the ()
         setMessage(e.target.value)
@@ -53,7 +54,7 @@ const Chat = () => {
             <input value={message} name="message" onChange={e => onChange(e)}/>
             <button onClick={()=> onClick()}>Send</button>
             </div>
-            
+
         </div>
     )
 }
