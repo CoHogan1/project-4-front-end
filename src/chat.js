@@ -2,24 +2,20 @@ import './App.css';
 import React, { useState, useEffect } from 'react'
 import io from 'socket.io-client'
 
-
-
 // socketIO
 const ENDPOINT = "http://localhost:8000";
 const socket = io.connect(ENDPOINT)
 
-
 const Chat = () => {
     const [messages, setMessages] = useState(["~~Chat with your opponent~~"])
     const [message, setMessage] = useState('')
-    let counter = useState(1)
 
     const getMessages = () => {
         socket.on('message', msg => {
             setMessages([...messages, msg])
         })
     }
-    
+
     useEffect(()=>{
         getMessages()
     }, [messages.length])
@@ -43,9 +39,9 @@ const Chat = () => {
 
             <div className="chatbox">
             {messages.length > 0 &&
-            messages.map(msg => (
-                <div className="text">
-                  <p id={counter}>{msg}</p>
+            messages.map((msg, index) => (
+                <div key={index} className="text">
+                    <p key={index}>{msg}</p>
                 </div>
                 ))}
             </div>
@@ -58,6 +54,5 @@ const Chat = () => {
         </div>
     )
 }
-
 
 export default Chat;

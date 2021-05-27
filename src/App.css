@@ -4,8 +4,6 @@
 }
 
 
-
-
 .chat {
     margin:auto;
     border: 3px solid black;
@@ -96,6 +94,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 500px;
+    margin-bottom: 50px;
 }
 
 
@@ -125,6 +124,9 @@ background: blue;
 }
 
 .allForms{
+    margin: auto;
+    margin-left: 100px;
+    margin-top: 30px;
 
 }
 .forms {
@@ -167,4 +169,9 @@ background: blue;
     background-color: lime;
     border-radius: 5px;
     border: 3px solid green;
+}
+
+
+.test {
+    background-color: green;
 }
