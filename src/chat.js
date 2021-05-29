@@ -1,7 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react'
 import io from 'socket.io-client'
-
 // socketIO
 const ENDPOINT = "http://localhost:8000";
 const socket = io.connect(ENDPOINT)
@@ -21,7 +20,7 @@ const Chat = () => {
     }, [messages.length])
 
 
-    const onChange = e => { // this may not need the ()
+    const onChange = e => {
         setMessage(e.target.value)
     }
 
@@ -41,7 +40,7 @@ const Chat = () => {
             {messages.length > 0 &&
             messages.map((msg, index) => (
                 <div key={index} className="text">
-                    <p key={index}>{msg}</p>
+                    <p>{msg}</p>
                 </div>
                 ))}
             </div>
@@ -54,5 +53,6 @@ const Chat = () => {
         </div>
     )
 }
+
 
 export default Chat;
