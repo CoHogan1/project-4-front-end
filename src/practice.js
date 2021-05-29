@@ -40,5 +40,3 @@ const fillPieces = () => {
     }))
 
 }
-
-fillPieces()

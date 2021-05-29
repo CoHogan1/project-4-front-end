@@ -6,23 +6,24 @@ const ENDPOINT = "http://localhost:8000";
 const socket = io.connect(ENDPOINT)
 
 const Chat = () => {
-    const [messages, setMessages] = useState(["~~Chat with your opponent~~"])
+    const [messages, setMessages] = useState(["~~Say Hello to your opponent~~"])
     const [message, setMessage] = useState('')
 
-    const getMessages = () => {
+    const getMessages = () => { // this will place the game board in place?
         socket.on('message', msg => {
             setMessages([...messages, msg])
         })
     }
 
-    useEffect(()=>{
+    useEffect(()=>{ // component did mount
         getMessages()
     }, [messages.length])
 
 
-    const onChange = e => {
+    const onChange = e => {// wont need this for game board
         setMessage(e.target.value)
     }
+
 
     const onClick = () => {
         if (message !== ''){

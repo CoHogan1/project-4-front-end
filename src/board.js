@@ -27,17 +27,26 @@ export default class Board extends Component {
         super(props)
             this.state= {
                 board: gameBoard,
-                updatedBoard: [],
                 firstStart: '',
                 firstEnd: '',
                 secondStart: '',
                 secondEnd: '',
                 move: false,
+                playerMove: [],
+
+
+
+
+
             }
         }
+
+
+    //===================================================Board movement=========
     mouseDown = (index, i, event) => {
-        console.log('mouseDown');
-        console.log(index, i)
+        //console.log('mouseDown');
+        //console.log(index, i)
+        // add a conditional to see which playe is moving.
          this.setState({
             firstStart: index,
             firstEnd: i,
@@ -45,8 +54,8 @@ export default class Board extends Component {
     }
 
     mouseUp = (index, i) => {
-        console.log('Mouse UP')
-        console.log(index, i)
+        //console.log('Mouse UP')
+        //console.log(index, i)
         this.setState({
             secondStart: index,
             secondEnd: i,
@@ -55,12 +64,9 @@ export default class Board extends Component {
     }
     sendMove = () => {
         console.log("sending");
-        console.log(this.state.firstStart, this.state.firstEnd);
-        console.log(this.state.secondStart, this.state.secondEnd);
-        const copyBoard = [...this.state.board]
-        copyBoard[this.state.firstStart][this.state.firstend] = 4
+        let copyBoard = [...this.state.board]
+        copyBoard[this.state.firstStart][this.state.firstEnd] = 4
         copyBoard[this.state.secondStart][this.state.secondEnd] = 1
-
         this.setState({
             move: false,
             board: copyBoard,
@@ -69,11 +75,15 @@ export default class Board extends Component {
             secondStart: '',
             secondEnd: '',
         })
+
     }
 
     selectAMove = () => {
         alert("Please select a move")
     }
+    //===================================================Board movement=========
+
+
 
     render(){
         return(
@@ -84,16 +94,19 @@ export default class Board extends Component {
                 <button onClick={this.state.move ? this.sendMove : this.selectAMove}  >Send Move</button>
 
                 <div className="board">
-                    {this.state.board.map((row, index) => row.map((square, i) => {
+
+                    {
+                        this.state.board.map((row, index) => row.map((square, i) => {
                         if (square === 0){
-                            return     <div key={index + " " + i}            className="red"   onMouseDown={(e)=> this.mouseDown(index, i, e)} onMouseUp={()=> this.mouseUp(index, i)}></div>
+                            return     <div key={index + " " + i} className="red"   onMouseDown={(e)=> this.mouseDown(index, i, e)} onMouseUp={()=> this.mouseUp(index, i)}></div>
                         } else {
                             if (square === 1) {
-                                return <div key={index + " " + i + "square"} className="black" onMouseDown={(e)=> this.mouseDown(index, i, e)} onMouseUp={()=> this.mouseUp(index, i)}><div key={index + " " + i} onMouseDown={(e)=> this.mouseDown(index, i, e)} onMouseUp={()=> this.mouseUp(index, i)} className="player1"></div></div>
-                            } else if (square === 2){
-                                return <div key={index + " " + i + "square"} className="black" onMouseDown={(e)=> this.mouseDown(index, i, e)} onMouseUp={()=> this.mouseUp(index, i)}><div key={index + " " + i} onMouseDown={(e)=> this.mouseDown(index, i, e)} onMouseUp={()=> this.mouseUp(index, i)} className="player2"></div></div>
+                                return <div key={index + " " + i} className="black" onMouseDown={(e)=> this.mouseDown(index, i, e)} onMouseUp={()=> this.mouseUp(index, i)}><div key={index + " " + i} onMouseDown={(e)=> this.mouseDown(index, i, e)} onMouseUp={()=> this.mouseUp(index, i)} className="player1"></div></div>
+                            } else if (square === 2) {
+                                return <div key={index + " " + i} className="black" onMouseDown={(e)=> this.mouseDown(index, i, e)} onMouseUp={()=> this.mouseUp(index, i)}><div key={index + " " + i} onMouseDown={(e)=> this.mouseDown(index, i, e)} onMouseUp={()=> this.mouseUp(index, i)} className="player2"></div></div>
+                            } else {
+                            return     <div key={index + " " + i} className="black" onMouseDown={(e)=> this.mouseDown(index, i, e)} onMouseUp={()=> this.mouseUp(index, i)}></div>
                             }
-                            return     <div key={index + " " + i + "square"} className="black" onMouseDown={(e)=> this.mouseDown(index, i, e)} onMouseUp={()=> this.mouseUp(index, i)}></div>
                         }
 
                     }))}
