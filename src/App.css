@@ -3,7 +3,10 @@
     margin: auto;
 }
 
-
+.nav {
+    background-color: black;
+    color:white;
+}
 .chat {
     margin:auto;
     border: 3px solid black;
@@ -40,9 +43,6 @@
     background-color: grey;
     color: white;
 }
-
-
-
 /* game baord------------------------------------ */
 .board-container {
     margin-left: 25%;
@@ -53,10 +53,16 @@
     height: 60px;
     width: 60px;
     text-align: center;
-    color: red;
     margin: 1px;
 }
-
+/* board */
+.NEWblack {
+    background-color: purple;
+    height: 60px;
+    width: 60px;
+    text-align: center;
+    margin: 1px;
+}
 .red {
     background-color: red;
     color: black;
@@ -64,7 +70,14 @@
     width: 60px;
     margin: 1px;
 }
-
+/* board */
+.NEWred {
+    background-color: yellow;
+    color: black;
+    height: 60px;
+    width: 60px;
+    margin: 1px;
+}
 /* game peices */
 
 .player1 {
@@ -76,8 +89,200 @@
     line-height: 45px;
     margin: 4px;
 }
-
+.NEWplayer1 {
+    background-color: purple;
+    color:black;
+    border-radius: 50%;
+    border: 2px solid white;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    margin: 4px;
+}
 .player2 {
+    background-color: slategrey;
+    border-radius: 50%;
+    border: 2px solid white;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    color: white;
+    margin: 4px;
+}
+.NEWplayer2 {
+    background-color: yellow;
+    color:black;
+    border-radius: 50%;
+    border: 2px solid white;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    margin: 4px;
+}
+.board {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 496px;
+    margin-bottom: 50px;
+    border-top:    4px solid grey;
+    border-right:  4px solid grey;
+    border-left:   4px solid lightgrey;
+    border-bottom: 4px solid lightgrey;
+}
+
+/* Scrollbar styles ===========================*/
+::-webkit-scrollbar {
+width: 12px;
+height: 12px;
+}
+/* scrolllbar border */
+::-webkit-scrollbar-track {
+border: 1px solid black;
+border-radius: 10px;
+}
+/* scroll bar  */
+::-webkit-scrollbar-thumb {
+background: cyan;
+border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+background: blue;
+}
+.allForms{
+    margin: auto;
+    margin-left: 100px;
+    margin-top: 30px;
+}
+.forms {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.forms input {
+    width: 300px;
+    margin: 5px;
+}
+.forms label {
+    width: 100px;
+}
+.submit {
+    max-width: 55px;
+    margin:auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+/* center submit fields */
+.s {
+    margin: auto;
+    width: 100px;
+}
+.loginForm {
+    width: 500px;
+    height: 220px;
+    background-color: lightblue;
+    border-radius: 5px;
+    border: 3px solid blue;
+    margin-bottom: 20px;
+}
+.newUserForm {
+    width: 500px;
+    background-color: lime;
+    border-radius: 5px;
+    border: 3px solid green;
+}
+.test {
+    background-color: green;
+}
+
+/* Dark mode ---------------------------------------------   dark mode  */
+/* Dark mode ---------------------------------------------   dark mode  */
+/* Dark mode ---------------------------------------------   dark mode  */
+
+.DARKApp {
+    text-align: center;
+    margin: auto;
+    background-color: black;
+    color: white;
+}
+.DARKnav {
+    background-color: darkgrey;
+    color: cyan;
+}
+.DARKchat {
+    margin:auto;
+    border: 3px solid grey;
+    border-radius: 5px;
+    max-height: 200px;
+    width:75%;
+}
+.DARKchatbox {
+    border:3px solid yellow;
+    background-color: rgba(50, 50, 50, 0.5);
+    max-height: 150px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+.DARKtext {
+    background-color: rgba(255, 255, 255, 0.5);
+    margin:auto;
+}
+.DARKchat-controls {
+    background-color: black;
+    padding: 5px;
+}
+.DARKchat input {
+    border: 2px solid black;
+    border-radius: 5px 0px 0px 5px;
+    width: 60%;
+}
+.DARKchat button {
+    border: 2px solid black;
+    border-left: 0;
+    border-radius: 0px 5px 5px 0px;
+}
+.DARKchat button:hover {
+    background-color: grey;
+    color: white;
+}
+
+
+
+/* game baord------------------------------------ */
+.DARKboard-container {
+    margin-left: 25%;
+}
+
+.DARKblack {
+    background-color: black;
+    height: 60px;
+    width: 60px;
+    text-align: center;
+    color: red;
+    margin: 1px;
+}
+
+.DARKred {
+    background-color: red;
+    color: black;
+    height: 60px;
+    width: 60px;
+    margin: 1px;
+}
+
+/* game peices */
+
+.DARKplayer1 {
+    background-color: red;
+    border-radius: 50%;
+    border: 2px solid white;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    margin: 4px;
+}
+
+.DARKplayer2 {
     background-color: slategrey;
     border-radius: 50%;
     border: 2px solid white;
@@ -89,12 +294,16 @@
 }
 
 
-.board {
+.DARKboard {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 500px;
+    width: 496px;
     margin-bottom: 50px;
+    border-top:    4px solid cyan;
+    border-right:  4px solid cyan;
+    border-left:   4px solid blue;
+    border-bottom: 4px solid blue;
 }
 
 
@@ -123,39 +332,39 @@ border-radius: 10px;
 background: blue;
 }
 
-.allForms{
+.DARKallForms{
     margin: auto;
     margin-left: 100px;
     margin-top: 30px;
 
 }
-.forms {
+.DARKforms {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
 
-.forms input {
+.DARKforms input {
     width: 300px;
     margin: 5px;
 }
-.forms label {
+.DARKforms label {
     width: 100px;
 }
-.submit {
+.DARKsubmit {
     max-width: 55px;
     margin:auto;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 /* center submit fields */
-.s {
+.DARKs {
     margin: auto;
     width: 100px;
 }
 
 
-.loginForm {
+.DARKloginForm {
     width: 500px;
     height: 220px;
     background-color: lightblue;
@@ -164,14 +373,9 @@ background: blue;
     margin-bottom: 20px;
 }
 
-.newUserForm {
+.DARKnewUserForm {
     width: 500px;
     background-color: lime;
     border-radius: 5px;
     border: 3px solid green;
-}
-
-
-.test {
-    background-color: green;
 }

@@ -4,6 +4,9 @@ import io from 'socket.io-client'
 // socketIO
 const ENDPOINT = "http://localhost:8000";
 const socket = io.connect(ENDPOINT)
+//const socket = io(ENDPOINT)
+
+
 
 const Chat = () => {
     const [messages, setMessages] = useState(["~~Say Hello to your opponent~~"])
@@ -11,11 +14,12 @@ const Chat = () => {
 
     const getMessages = () => { // this will place the game board in place?
         socket.on('message', msg => {
+            console.log(typeof(msg))
             setMessages([...messages, msg])
         })
     }
 
-    useEffect(()=>{ // component did mount
+    useEffect(()=>{
         getMessages()
     }, [messages.length])
 

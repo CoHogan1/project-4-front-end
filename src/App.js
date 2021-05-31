@@ -13,9 +13,11 @@ export default class App extends Component {
             name:'Conner',
             userURL: 'http://localhost:8000/api/v1/users/',
             user: '',
+            out: true,
             email:'',
             uname: '',
             pass:'',
+            darkMode: false,
         }
     }
 
@@ -45,12 +47,10 @@ export default class App extends Component {
             })
             const parsedResponse = await loginResponse.json()
             console.log(parsedResponse)
-            if (loginResponse.status === 200) {
+            if (loginResponse.status === 201) {
                 this.setState({
                     user: parsedResponse.data
                 })
-                // clear the input form after submission.
-
             }
         }
         catch(err){
@@ -84,6 +84,7 @@ export default class App extends Component {
             if (response.status === 200) {
                 this.setState({
                     user: parsedResponse.data,
+                    out: true,
                 })
             }
         }
@@ -93,31 +94,64 @@ export default class App extends Component {
         console.log(this.state.user)
     }
 
+    logOut = async (e) => {
+        console.log("logging out")
+        e.preventDefault()
+        const url = this.state.userURL + 'logout'
+        const resp = await fetch(url ,{
+            credentials: 'include',
+            method: "DELETE",
+            headers : {
+                'Content-Type' : 'application/json'
+            }
+        })
+        if (resp.status === 2000) {
+            this.setState({
+                user: '',
+            })
+        }
+    }
 
 
 
-
-
-
-
-
-
-
-
+    toggle = () => {
+        if (this.state.darkMode) {
+            this.setState({
+                darkMode: false,
+            })
+            //console.log(this.state.darkMode);
+        } else {
+            this.setState({
+                darkMode: true
+            })
+            //console.log(this.state.darkMode);
+        }
+    }
 
     render() {
         return (
-            <div className="App">
-                <h1>Checkers</h1>
-                <Board />
+            <div className={this.state.darkMode ? "DARKApp" : "App"}>
+                <div className={this.state.darkMode ? 'DARKnav' : "nav"}>
+                    <h1>Checkers</h1>
+                    <button onClick={this.toggle}>Darkmode</button>
+                </div>
 
-                <Chat />
+            { this.state.out ? <div>
 
-               <div className="allForms">
+                <Board darkMode={this.state.darkMode}/>
+                <Chat darkMode={this.state.darkMode}/>
 
-                <div className='loginForm'>
+                <button onClick={this.logOut}>Logout</button>
+                </div> :
+
+
+
+
+                <div className={this.state.darkMode ? "DARKallForms" :"allForms"}>
+
+                <div className={this.state.darkMode ? "DARKloginForm" :'loginForm'}>
                     <h1>Login</h1>
-                    <form className="forms" onSubmit={this.onLoginSubmit}>
+                    <form className={this.state.darkMode ? "DARKforms":"forms"} onSubmit={this.onLoginSubmit}>
                         <label>Email:</label>
                         <input onChange={this.handleChange} name='email' ></input>
                         <br></br>
@@ -128,16 +162,16 @@ export default class App extends Component {
                         <input name='password' onChange={this.handleChange} type='password'></input>
                         <br></br>
                         <div className="s">
-                        <input className="submit" type='submit' value='Login'></input>
+                        <input className={this.state.darkMode? "DARKsubmit" :"submit"} type='submit' value='Login'></input>
                         </div>
                     </form>
                 </div>
 
-                <div className="spacer"></div>
+            <div className={this.state.darkMode? "DARKspace":"spacer"}></div>
 
-                <div className='newUserForm'>
+                <div className={this.state.darkMode? "DARKnewUserForm" :'newUserForm'}>
                 <h1>Create User</h1>
-                    <form className="forms" onSubmit={this.newUserSubmit}>
+                    <form className={this.state.darkMode ? "DARKforms":"forms"} onSubmit={this.newUserSubmit}>
                         <label>Email:</label>
                         <input onChange={this.handleChange} name='email' value={this.state.email} ></input>
                         <br></br>
@@ -148,11 +182,14 @@ export default class App extends Component {
                         <input onChange={this.handleChange} name='password' type='password'  ></input>
                         <br></br>
                         <div className="s">
-                        <input className="submit" type='submit' value='Create'></input>
+                        <input className={this.state.darkMode? "DARKsubmit" :"submit"} type='submit' value='Create'></input>
                         </div>
                     </form>
                 </div>
-                </div>
+            </div> }
+
+
+
 
             </div>
         )
