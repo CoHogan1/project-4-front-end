@@ -35,9 +35,9 @@ export default class Board extends Component {
         }
 
     getOpponentsMoves = () => {
-        console.log('clicked');
-        socket.on('message', move => {
-            console.log(move)
+        //console.log('clicked');
+        socket.on('move', move => {
+            //console.log(move)
             this.setState({
                 board: move
             })
@@ -45,9 +45,15 @@ export default class Board extends Component {
         //console.log(this.state.board);
     }
 
-    componentDidUpdate(){
+    componentDidMount(){
         this.getOpponentsMoves()
-        console.log(this.state.board);
+        //console.log(this.state.board)
+    }
+
+
+    // comp will unmount
+    componentWillUnmount(){
+        console.log("unmounting socketio.")
     }
 
     //===================================================Board movement=========
@@ -101,8 +107,6 @@ export default class Board extends Component {
         }
     }
     //===================================================Board movement=========
-
-
 
     render(){
         return(

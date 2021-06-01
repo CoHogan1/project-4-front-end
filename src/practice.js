@@ -1,3 +1,6 @@
+
+
+
 const gameBoard = [
   [0, 1, 0, 1, 0, 1, 0, 1],
   [1, 0, 1, 0, 1, 0, 1, 0],
@@ -8,6 +11,13 @@ const gameBoard = [
   [0, 2, 0, 2, 0, 2, 0, 2],
   [2, 0, 2, 0, 2, 0, 2, 0]
 ]
+
+
+
+
+
+
+
 
 const boardColors = [
     [0, 1, 0, 1, 0, 1, 0, 1],
@@ -21,6 +31,17 @@ const boardColors = [
 ]
 
 
+
+
+
+
+
+
+
+
+
+
+
 const gameBoard2 = [
   [0, 1, 0, 1, 0, 1, 0, 1],
   [1, 0, 1, 0, 1, 0, 1, 0],
@@ -32,11 +53,11 @@ const gameBoard2 = [
   [2, 0, 2, 0, 2, 0, 2, 0],
 ]
 
-
-
 const fillPieces = () => {
     gameBoard2.forEach((row, index) => row.map((square, i) => {
         console.log(index, i);
     }))
 
 }
+
+fillPieces()

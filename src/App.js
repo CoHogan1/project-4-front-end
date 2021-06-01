@@ -4,8 +4,6 @@ import React, { Component } from 'react'
 import Chat from './chat'
 import Board from './board'
 
-
-
 export default class App extends Component {
     constructor(props){
         super(props)
@@ -86,6 +84,7 @@ export default class App extends Component {
                     user: parsedResponse.data,
                     out: true,
                 })
+
             }
         }
         catch(err){
@@ -112,8 +111,6 @@ export default class App extends Component {
         }
     }
 
-
-
     toggle = () => {
         if (this.state.darkMode) {
             this.setState({
@@ -127,6 +124,10 @@ export default class App extends Component {
             //console.log(this.state.darkMode);
         }
     }
+
+
+
+
 
     render() {
         return (

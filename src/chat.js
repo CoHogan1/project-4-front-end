@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import io from 'socket.io-client'
 // socketIO
 const ENDPOINT = "http://localhost:8000";
@@ -14,12 +14,13 @@ const Chat = () => {
 
     const getMessages = () => { // this will place the game board in place?
         socket.on('message', msg => {
-            console.log(typeof(msg))
+            //console.log(typeof(msg), msg)
             setMessages([...messages, msg])
         })
     }
 
     useEffect(()=>{
+        scrollToBottom()
         getMessages()
     }, [messages.length])
 
@@ -37,6 +38,13 @@ const Chat = () => {
             alert('Fill out message please')
         }
     }
+    const messagesEndRef = useRef(null)
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    }
+
+
 
     return (
         <div className="chat">
@@ -48,6 +56,7 @@ const Chat = () => {
                     <p>{msg}</p>
                 </div>
                 ))}
+                <div ref={messagesEndRef} />
             </div>
 
             <div className="chat-controls">
