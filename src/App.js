@@ -16,6 +16,15 @@ export default class App extends Component {
             uname: '',
             pass:'',
             darkMode: false,
+            numberOfUsers: 0,
+            listOfUsers: [],
+            editUser: {},
+            toggleModal: false,
+            showU: false,
+            username: '',
+            email: '',
+            password: '',
+            togModal: false,
         }
     }
 
@@ -78,19 +87,19 @@ export default class App extends Component {
                 }
             })
             const parsedResponse = await response.json()
-            console.log(parsedResponse.data)
+            //console.log(parsedResponse.data)
             if (response.status === 200) {
                 this.setState({
                     user: parsedResponse.data,
                     out: true,
+                    numberOfUsers: 1,
                 })
-
             }
         }
         catch(err){
           console.log('Error => ', err);
         }
-        console.log(this.state.user)
+        //console.log(this.state.user)
     }
 
     logOut = async (e) => {
@@ -125,9 +134,116 @@ export default class App extends Component {
         }
     }
 
+    fetchInfo = () => {
+        //console.log('fetching dogs')
+        fetch('http://localhost:8000/api/v1/users/', {
+            credentials: 'include',
+            method: 'GET',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+        })
+        .then(res => {return res.json()
+        }).then(data => {
+            //console.log(data.data)
+            this.setState({
+                listOfUsers: data.data,
+          })
+        })
+    }
+    addUser = (newUser) => {
+        const copyUsers = [...this.state.listOfUsers]
+        copyUsers.push(newUser)
+        this.setState({
+            listOfUsers: copyUsers
+        })
+        console.log(this.state.listOfUsers[this.state.listOfUsers.length -1])
+        this.componentDidMount()
+    }
+    showEdit = (user) => {
+        console.log("Edit Clicked")
+        //console.log(dog);
+        this.setState({
+            togModal: true,
+            username: user.username,
+            email: user.email,
+            password: user.password,
+            editUser: user,
+        })
+    }
+    handleSubmit = async (e) => {
+        e.preventDefault()
+        console.log('http://localhost:8000/api/v1/users/' + this.state.editUser.id)
+        const url = 'http://localhost:8000/api/v1/users/' + this.state.editUser.id
+        try{
+            const response = await fetch (url, {
+                credentials: 'include',
+                method: 'PUT',
+                body: JSON.stringify({
+                    username: e.target.username.value,
+                    email: e.target.email.value,
+                    password: e.target.password.value,
+                }),
+                headers: {
+                    'Content-Type' : 'application/json'
+                }
+            })
+            if (response.status === 200) {
+                const updatedUser = await response.json()
+                const  findIndex = this.state.listOfUsers.findIndex(user => user.id === updatedUser.data.id)
+                const copyUsers = [...this.state.listOfUsers]
+                copyUsers[findIndex] =  updatedUser.data
+                this.setState({
+                    listOfUsers: copyUsers,
+                    togModal: false,
+                })
+            }
+        }
+        catch(err){
+          console.log('Error => ', err);
+        }
+        console.log(this.state.listOfUsers+ " updated user")
+    }
+    deleteUser = async (id) => {
+        const url = 'http://localhost:8000/api/v1/users/' + id
+        try{
+            const response = await fetch(url, {
+                credentials: 'include',
+                method: 'DELETE',
+            })
+            if (response.status === 200) {
+                const findIndex = this.state.listOfUsers.findIndex(user => user.id === id)
+                const copyUsers = [...this.state.listOfUsers]
+                copyUsers.splice(findIndex,1)
+                this.setState({
+                    listOfUsers: copyUsers
+                })
+            }
+        }
+        catch(err){
+            console.log(err)
+        }
+    window.location.reload(false)// maybe I can call componentDidMount()..?
+    }
+    toggleUsers = () => {
+        //console.log('clicked')
+        if (this.state.showU){
+            this.setState({
+                showU: false,
+            })
+        } else {
+            this.setState({
+                showU: true,
+            })
+        }
+        this.componentDidMount()
+    }
 
-
-
+    componentDidMount(){
+        this.fetchInfo()
+        //console.log("fetchedinfo")
+        //console.log(this.state.listOfUsers)
+    }
 
     render() {
         return (
@@ -135,6 +251,7 @@ export default class App extends Component {
                 <div className={this.state.darkMode ? 'DARKnav' : "nav"}>
                     <h1>Checkers</h1>
                     <button onClick={this.toggle}>Darkmode</button>
+                    <p className={this.state.darkMode ? "DARKun1" : "un1"}>Player 1:{this.state.user.username}</p>
                 </div>
 
             { this.state.out ? <div>
@@ -189,9 +306,47 @@ export default class App extends Component {
                 </div>
             </div> }
 
+            <div>
+                <button onClick={this.toggleUsers}>View All users</button>
 
+            {this.state.showU ?
+                <div>
+                {this.state.listOfUsers.map(user => {
+                    return (
+                        <ul key={user.id}>
+                            <li>UserName:{user.username}</li>
+                            <li>Id:{user.id}</li>
+                            <li>Email:{user.email}</li>
+                            <li>Pass:{user.password}</li>
+                            <li className="delbut" onClick={()=> this.deleteUser(user.id)}>Delete</li>
+                            <li className="edbut" onClick={()=> this.showEdit(user)}>Edit</li>
+                            <br></br>
+                        </ul>
+                    )
+                })
+            } </div> :
+                <div>Add User First</div>
+                }
+                </div>
 
+                {this.state.togModal ?
+                    <div>
+                        <h1>Edit User</h1>
+                        <form onSubmit={this.handleSubmit}>
+                            <label>Name:</label>
+                            <input name='username' value={this.state.username} onChange={this.handleChange} ></input>
 
+                            <label>Email:</label>
+                            <input name='email' value={this.state.email} onChange={this.handleChange} ></input>
+
+                            <label>Pass:</label>
+                            <input name='password' value={this.state.password} onChange={this.handleChange}  ></input>
+
+                            <input type='submit'></input>
+                        </form>
+                    </div>
+                    : <div></div>
+                }
             </div>
         )
     }

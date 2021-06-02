@@ -53,7 +53,7 @@ export default class Board extends Component {
 
     // comp will unmount
     componentWillUnmount(){
-        console.log("unmounting socketio.")
+        //console.log("unmounting socketio.")
     }
 
     //===================================================Board movement=========

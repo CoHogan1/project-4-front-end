@@ -8,9 +8,10 @@ const socket = io.connect(ENDPOINT)
 
 
 
-const Chat = () => {
+const Chat = (props) => {
     const [messages, setMessages] = useState(["~~Say Hello to your opponent~~"])
     const [message, setMessage] = useState('')
+    const [user, setUser] = useState(props.name)
 
     const getMessages = () => { // this will place the game board in place?
         socket.on('message', msg => {
@@ -25,12 +26,12 @@ const Chat = () => {
     }, [messages.length])
 
 
-    const onChange = e => {// wont need this for game board
+    const onChange = e => {
         setMessage(e.target.value)
     }
 
 
-    const onClick = () => {
+    const onClick = (user) => {
         if (message !== ''){
             socket.emit('message', message)
             setMessage('')
@@ -53,7 +54,7 @@ const Chat = () => {
             {messages.length > 0 &&
             messages.map((msg, index) => (
                 <div key={index} className="text">
-                    <p>{msg}</p>
+                    <p className={"p1"}>{user}-{msg}</p>
                 </div>
                 ))}
                 <div ref={messagesEndRef} />

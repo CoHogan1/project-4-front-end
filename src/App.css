@@ -7,6 +7,12 @@
     background-color: black;
     color:white;
 }
+.un1 {
+    color:red;
+}
+.un2 {
+    color: orange;
+}
 .chat {
     margin:auto;
     border: 3px solid black;
@@ -21,9 +27,14 @@
     overflow: scroll;
     overflow-x: hidden;
 }
+.p1 {
+    position:sticky;
+}
+.p2 {
+
+}
 .text {
     background-color: rgba(255, 255, 255, 0.5);
-    margin:auto;
 }
 .chat-controls {
     background-color: black;
@@ -207,6 +218,12 @@ background: blue;
 }
 .DARKnav {
     background-color: darkgrey;
+    color: cyan;
+}
+.DARKun1 {
+    color: blue;
+}
+.DARKun2 {
     color: cyan;
 }
 .DARKchat {
