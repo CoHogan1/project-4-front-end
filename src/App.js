@@ -4,12 +4,21 @@ import React, { Component } from 'react'
 import Chat from './chat'
 import Board from './board'
 
+let BASEURL = ''
+
+if (process.env.NODE_ENV === 'development') {
+  BASEURL = 'http://localhost8000/' // mmarcus uses 3001, or 3000
+} else {
+  BASEURL = "https://back-end-444.herokuapp.com/"
+}
+
 export default class App extends Component {
     constructor(props){
         super(props)
         this.state = {
             name:'Conner',
-            userURL: 'http://localhost:8000/api/v1/users/',
+            base: BASEURL,
+            userURL: 'api/v1/users/',
             user: '',
             out: true,
             email:'',
@@ -38,7 +47,7 @@ export default class App extends Component {
     newUserSubmit = async (event) => {
         console.log("new user submit clicked");
         event.preventDefault()
-        const url = this.state.userURL + 'register'
+        const url = this.state.base + this.state.userURL + 'register'
         try{
             const loginResponse = await fetch (url, {
                 credentials: 'include',
@@ -72,7 +81,7 @@ export default class App extends Component {
             alert('Fill out the form please')
 
         }
-        const url = this.state.userURL + 'login'
+        const url = this.state.base + this.state.userURL + 'login'
         try {
             const response = await fetch (url, {
                 credentials: 'include',
@@ -105,7 +114,7 @@ export default class App extends Component {
     logOut = async (e) => {
         console.log("logging out")
         e.preventDefault()
-        const url = this.state.userURL + 'logout'
+        const url = this.state.base + this.state.userURL + 'logout'
         const resp = await fetch(url ,{
             credentials: 'include',
             method: "DELETE",
@@ -136,7 +145,7 @@ export default class App extends Component {
 
     fetchInfo = () => {
         //console.log('fetching dogs')
-        fetch('http://localhost:8000/api/v1/users/', {
+        fetch(this.state.base + this.state.userURL, {
             credentials: 'include',
             method: 'GET',
             headers: {
@@ -173,8 +182,8 @@ export default class App extends Component {
     }
     handleSubmit = async (e) => {
         e.preventDefault()
-        console.log('http://localhost:8000/api/v1/users/' + this.state.editUser.id)
-        const url = 'http://localhost:8000/api/v1/users/' + this.state.editUser.id
+        console.log(this.state.base + this.state.userURL + this.state.editUser.id)
+        const url = this.state.base + this.state.userURL + this.state.editUser.id
         try{
             const response = await fetch (url, {
                 credentials: 'include',
@@ -205,7 +214,7 @@ export default class App extends Component {
         console.log(this.state.listOfUsers+ " updated user")
     }
     deleteUser = async (id) => {
-        const url = 'http://localhost:8000/api/v1/users/' + id
+        const url = this.state.base + this.state.userURL + id
         try{
             const response = await fetch(url, {
                 credentials: 'include',

@@ -30,7 +30,8 @@ export default class Board extends Component {
                 move: false,
                 playerMove: [],
                 colors: false,
-                dark: this.props.darkMode
+                dark: this.props.darkMode,
+                player: 0,
             }
         }
 
@@ -57,26 +58,63 @@ export default class Board extends Component {
     }
 
     //===================================================Board movement=========
-    mouseDown = (index, i, event) => {
-        //console.log('mouseDown');
-        //console.log(index, i)
-        // add a conditional to see which playe is moving.
-         this.setState({
+    mouseDown = (index, i) => {
+        console.log(`${index}, ${i}, start pos`)
+        let playerNum = gameBoard[index][i] // 1 for player 1, 2 for player 2
+        this.setState({
             firstStart: index,
             firstEnd: i,
+            player: playerNum
         })
     }
 
+
     mouseUp = (index, i) => {
-        //console.log('Mouse UP')
-        //console.log(index, i)
-        this.setState({
-            secondStart: index,
-            secondEnd: i,
-            move: true,
-        })
+        console.log(`${index}, ${i}, end pos`)
+        if (this.state.player === 1) {
+            let copyBoard = [...this.state.board]
+            copyBoard[this.state.firstStart][this.state.firstEnd] = 4
+            copyBoard[index][i] = 1
+            this.setState({
+                board: copyBoard
+            })
+        } else {
+            let copyBoard = [...this.state.board]
+            copyBoard[this.state.firstStart][this.state.firstEnd] = 4
+            copyBoard[index][i] = 2
+            this.setState({
+                board: copyBoard
+            })
+        }
+
+
+        // if (index !== this.state.firstStart + 1) { // need to clear first state.
+        //     console.log(index)
+        //     console.log("invalid move")
+        //     return
+        // }
+        //
+        // // if (i !== this.state.firstEnd + 1 || i !== this.state.firstEnd - 1) {
+        // //
+        // // }
+        //
+        // if (this.state.board[index][i] !== 2) {
+        //     console.log("open position")
+        // } else {
+        //     console.log("player two is there")
+        // }
+
+        // this.setState({
+        //     secondStart: index,
+        //     secondEnd: i,
+        //     move: true,
+        // })
     }
+
     sendMove = () => {
+        if (this.state.secondEnd === '') {
+            return this.selectAMove()
+        }
         let copyBoard = [...this.state.board]
         copyBoard[this.state.firstStart][this.state.firstEnd] = 4
         copyBoard[this.state.secondStart][this.state.secondEnd] = 1
@@ -121,14 +159,14 @@ export default class Board extends Component {
                     {
                         this.state.board.map((row, index) => row.map((square, i) => {
                         if (square === 0){
-                            return     <div key={index + " " + i} className={this.state.colors ? "NEWred" :"red"}   onMouseDown={(e)=> this.mouseDown(index, i, e)} onMouseUp={()=> this.mouseUp(index, i)}></div>
+                            return     <div key={index + " " + i} className={this.state.colors ? "NEWred" :"red"} onMouseDown={()=> this.mouseDown(index, i)} ></div>
                         } else {
                             if (square === 1) {
-                                return <div key={index + " " + i} className={this.state.colors ? "NEWblack" :"black"} onMouseDown={(e)=> this.mouseDown(index, i, e)} onMouseUp={()=> this.mouseUp(index, i)}><div key={index + " " + i} onMouseDown={()=> this.mouseDown(index, i)} onMouseUp={(e)=> this.mouseUp(index, i, e)} className={this.state.colors ? "NEWplayer1" :"player1"}></div></div>
+                                return <div key={index + " " + i} className={this.state.colors ? "NEWblack" :"black"} onMouseUp={()=> this.mouseUp(index, i)}><div key={'red'} onMouseDown={()=> this.mouseDown(index, i)} className={this.state.colors ? "NEWplayer1" :"player1"}>x</div></div>
                             } else if (square === 2) {
-                                return <div key={index + " " + i} className={this.state.colors ? "NEWblack" :"black"} onMouseDown={(e)=> this.mouseDown(index, i, e)} onMouseUp={()=> this.mouseUp(index, i)}><div key={index + " " + i} onMouseDown={()=> this.mouseDown(index, i)} onMouseUp={(e)=> this.mouseUp(index, i, e)} className={this.state.colors ? "NEWplayer2" :"player2"}></div></div>
+                                return <div key={index + " " + i} className={this.state.colors ? "NEWblack" :"black"} onMouseUp={()=> this.mouseUp(index, i)}><div key={'black'} onMouseDown={()=> this.mouseDown(index, i)} className={this.state.colors ? "NEWplayer2" :"player2"}>y</div></div>
                             } else {
-                            return     <div key={index + " " + i} className={this.state.colors ? "NEWblack" :"black"} onMouseDown={(e)=> this.mouseDown(index, i, e)} onMouseUp={()=> this.mouseUp(index, i)}></div>
+                            return     <div key={index + " " + i} className={this.state.colors ? "NEWblack" :"black"} onMouseUp={()=> this.mouseUp(index, i)}></div>
                             }
                         }
                     }))}
