@@ -260,6 +260,7 @@ export default class App extends Component {
                 <div className={this.state.darkMode ? 'DARKnav' : "nav"}>
                     <h1>Checkers</h1>
                     <button onClick={this.toggle}>Darkmode</button>
+                    <button onClick={this.logOut}>Logout</button>
                     <p className={this.state.darkMode ? "DARKun1" : "un1"}>Player 1:{this.state.user.username}</p>
                 </div>
 
@@ -268,7 +269,6 @@ export default class App extends Component {
                 <Board darkMode={this.state.darkMode}/>
                 <Chat darkMode={this.state.darkMode}/>
 
-                <button onClick={this.logOut}>Logout</button>
                 </div> :
 
 
@@ -316,7 +316,7 @@ export default class App extends Component {
             </div> }
 
             <div>
-                <button onClick={this.toggleUsers}>View All users</button>
+                <button className="userButton" onClick={this.toggleUsers}>View All users</button>
 
             {this.state.showU ?
                 <div>

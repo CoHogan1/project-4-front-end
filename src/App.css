@@ -1,6 +1,13 @@
 .App {
     text-align: center;
     margin: auto;
+    background-color: slategrey;
+    background-image: url('checkers.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+h1 {
+    font-size: 3em;
 }
 
 .nav {
@@ -15,10 +22,11 @@
 }
 .chat {
     margin:auto;
-    border: 3px solid black;
+    border: 3px solid white;
     border-radius: 5px;
     max-height: 200px;
     width:75%;
+    background-color: red;
 }
 .chatbox {
     border:3px solid black;
@@ -49,10 +57,6 @@
     border: 2px solid black;
     border-left: 0;
     border-radius: 0px 5px 5px 0px;
-}
-.chat button:hover {
-    background-color: grey;
-    color: white;
 }
 /* game baord------------------------------------ */
 .board-container {
@@ -136,10 +140,11 @@
     flex-wrap: wrap;
     width: 496px;
     margin-bottom: 50px;
-    border-top:    4px solid grey;
-    border-right:  4px solid grey;
-    border-left:   4px solid lightgrey;
-    border-bottom: 4px solid lightgrey;
+    border-top:    5px solid grey;
+    border-right:  5px solid grey;
+    border-left:   5px solid lightgrey;
+    border-bottom: 5px solid lightgrey;
+    background-color: white;
 }
 
 /* Scrollbar styles ===========================*/
@@ -154,12 +159,13 @@ border-radius: 10px;
 }
 /* scroll bar  */
 ::-webkit-scrollbar-thumb {
-background: cyan;
+background: darkorange;
 border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-background: blue;
+background: red;
 }
+/* =============================================*/
 .allForms{
     margin: auto;
     margin-left: 100px;
@@ -204,6 +210,14 @@ background: blue;
 }
 .test {
     background-color: green;
+}
+.userButton {
+    margin-top: 20px;
+}
+button:hover {
+    background-color: yellow;
+    color: black;
+
 }
 
 /* Dark mode ---------------------------------------------   dark mode  */
@@ -321,32 +335,6 @@ background: blue;
     border-right:  4px solid cyan;
     border-left:   4px solid blue;
     border-bottom: 4px solid blue;
-}
-
-
-
-
-
-/* Scrollbar styles ===========================*/
-::-webkit-scrollbar {
-width: 12px;
-height: 12px;
-}
-
-/* scrolllbar border */
-::-webkit-scrollbar-track {
-border: 1px solid black;
-border-radius: 10px;
-}
-
-/* scroll bar  */
-::-webkit-scrollbar-thumb {
-background: cyan;
-border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-background: blue;
 }
 
 .DARKallForms{
