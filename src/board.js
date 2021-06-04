@@ -95,11 +95,25 @@ export default class Board extends Component {
                             board: copyBoard
                         })
                     } else {
-                        console.log(this.state.board[index + 2 ][i + 2])
+                        // keep player turn
                         return alert("Cannot jump that piece")
                     }
                 } else { // player is moving left
-
+                    if (this.state.secondEnd === this.state.firstEnd - 1) {// player is moving left
+                        if(this.state.board[index + 1 ][i - 1] !== 2 && this.state.board[index + 1 ][i - 1] !== 1) {// if jump possible
+                            console.log("allowed jump to the right")
+                            let copyBoard = [...this.state.board]
+                            copyBoard[this.state.firstStart][this.state.firstEnd] = 4 // previous position clear square
+                            copyBoard[this.state.secondStart][this.state.secondEnd] = 4
+                            copyBoard[index+1][i-1] = 1 // ending pos after jump
+                            this.setState({
+                                board:copyBoard
+                            })
+                        } else {
+                            // keep player turn
+                            return alert("Cannot jump that piece")
+                        }
+                    }
                 }
             } else { // square is empty player can move there
                 let copyBoard = [...this.state.board]
@@ -110,29 +124,49 @@ export default class Board extends Component {
                 })
             }
 
+        } else { // player 2 logic 222222222222222222222222222222222222222222222
+            if (this.state.player === false) {// player 2
+                if (this.state.board[index][i] === 1) { // if lands on player
+                    if (this.state.secondEnd === this.state.firstEnd - 1) {// player is moving left
+                        if(this.state.board[index - 1 ][i - 1] !== 2 && this.state.board[index - 1 ][i - 1] !== 1) {// if jump possible
+                            console.log("allowed jump to the left")
+                            let copyBoard = [...this.state.board]
+                            copyBoard[this.state.firstStart][this.state.firstEnd] = 4 // previous position clear square
+                            copyBoard[this.state.secondStart][this.state.secondEnd] = 4 // player removed
+                            copyBoard[index-1][i-1] = 2 // ending position to the left player 2
+                            this.setState({
+                                board: copyBoard
+                            })
+                        } else {
+                            // keep player turn
+                            return alert("Cannot jump that piece")
+                        }
+                    } else {// moving to the right
+                        if(this.state.board[index - 1 ][i + 1] !== 2 && this.state.board[index - 1 ][i + 1] !== 1) {// if jump possible
+                            console.log("allowed jump to the right")
+                            let copyBoard = [...this.state.board]
+                            copyBoard[this.state.firstStart][this.state.firstEnd] = 4 // previous position clear square
+                            copyBoard[this.state.secondStart][this.state.secondEnd] = 4
+                            copyBoard[index - 1][i + 1] = 2 // ending pos after jump
+                            this.setState({
+                                board:copyBoard
+                            })
+                        }
 
-
-
-
-        } else { // player 2 logic
-
-            if (this.state.player === false) {
-
+                    }
+                } else { // no player on square
+                    let copyBoard = [...this.state.board]
+                    copyBoard[this.state.firstStart][this.state.firstEnd] = 4
+                    copyBoard[index][i] = 2
+                    this.setState({
+                        board: copyBoard
+                    })
+                }
             }
-            let copyBoard = [...this.state.board]
-            copyBoard[this.state.firstStart][this.state.firstEnd] = 4
-            copyBoard[index][i] = 2
-            this.setState({
-                board: copyBoard
-            })
-
         }
-        // set up jump logic
-
-
-
-
     }
+
+
 
     sendMove = () => {
         // refactor this to only send board...

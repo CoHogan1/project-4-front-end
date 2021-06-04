@@ -356,6 +356,8 @@ export default class App extends Component {
                     </div>
                     : <div></div>
                 }
+
+                <div className='foot'>Footer</div>
             </div>
         )
     }
