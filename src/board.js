@@ -82,18 +82,37 @@ export default class Board extends Component {
             secondEnd: i,
         })
         // this choses the color
-        if (this.state.player) { // player 1 logic  this.state.player = true
-            if (this.state.board[index][i] === 2) { // when p1 jumps p2
-                console.log(this.state.board[index][i])
-                
+        if (this.state.player) { // player 1 turn - red
+            if (this.state.board[index][i] === 2) { // there is oponent on square
+                if (this.state.secondEnd === this.state.firstEnd + 1) {// player is moving right
+                    if(this.state.board[index + 1 ][i + 1] !== 2 && this.state.board[index + 1 ][i + 1] !== 1) {// if jump possible
+                        console.log("allowed jump to the right")
+                        let copyBoard = [...this.state.board]
+                        copyBoard[this.state.firstStart][this.state.firstEnd] = 4 // previous position clear square
+                        copyBoard[this.state.secondStart][this.state.secondEnd] = 4
+                        copyBoard[index+1][i+1] = 1 // ending position to the right
+                        this.setState({
+                            board: copyBoard
+                        })
+                    } else {
+                        console.log(this.state.board[index + 2 ][i + 2])
+                        return alert("Cannot jump that piece")
+                    }
+                } else { // player is moving left
+
+                }
+            } else { // square is empty player can move there
+                let copyBoard = [...this.state.board]
+                copyBoard[this.state.firstStart][this.state.firstEnd] = 4
+                copyBoard[index][i] = 1
+                this.setState({
+                    board: copyBoard
+                })
             }
 
-            let copyBoard = [...this.state.board]
-            copyBoard[this.state.firstStart][this.state.firstEnd] = 4 // previous position
-            copyBoard[index][i] = 1 // ending position
-            this.setState({
-                board: copyBoard
-            })
+
+
+
 
         } else { // player 2 logic
 

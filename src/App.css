@@ -11,7 +11,7 @@ h1 {
 }
 
 .nav {
-    background-color: black;
+    background-color: rgba(255,0,0, 0.5);
     color:white;
 }
 .un1 {
@@ -43,6 +43,7 @@ h1 {
 }
 .text {
     background-color: rgba(255, 255, 255, 0.5);
+    color: black;
 }
 .chat-controls {
     background-color: black;
@@ -72,7 +73,7 @@ h1 {
 }
 /* board */
 .NEWblack {
-    background-color: purple;
+    background-color: lime;
     height: 60px;
     width: 60px;
     text-align: center;
@@ -87,7 +88,7 @@ h1 {
 }
 /* board */
 .NEWred {
-    background-color: yellow;
+    background-color: cyan;
     color: black;
     height: 60px;
     width: 60px;
@@ -105,7 +106,7 @@ h1 {
     margin: 4px;
 }
 .NEWplayer1 {
-    background-color: purple;
+    background-color: lime;
     color:black;
     border-radius: 50%;
     border: 2px solid white;
@@ -125,7 +126,7 @@ h1 {
     margin: 4px;
 }
 .NEWplayer2 {
-    background-color: yellow;
+    background-color: cyan;
     color:black;
     border-radius: 50%;
     border: 2px solid white;
@@ -215,7 +216,7 @@ background: red;
     margin-top: 20px;
 }
 button:hover {
-    background-color: yellow;
+    background-color: darkorange;
     color: black;
 
 }
@@ -227,12 +228,14 @@ button:hover {
 .DARKApp {
     text-align: center;
     margin: auto;
-    background-color: black;
+    background-image: url('black.png');
     color: white;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 .DARKnav {
-    background-color: darkgrey;
-    color: cyan;
+    background-color: rgba(0,0,0, 0.6);
+    color: darkred;
 }
 .DARKun1 {
     color: blue;
