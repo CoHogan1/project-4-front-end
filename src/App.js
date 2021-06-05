@@ -7,7 +7,7 @@ import Board from './board'
 let BASEURL = ''
 
 if (process.env.NODE_ENV === 'development') {
-  BASEURL = 'http://localhost8000/' // mmarcus uses 3001, or 3000
+  BASEURL = 'http://localhost:8000/'
 } else {
   BASEURL = "https://back-end-444.herokuapp.com/"
 }
@@ -19,8 +19,9 @@ export default class App extends Component {
             name:'Conner',
             base: BASEURL,
             userURL: 'api/v1/users/',
-            user: '',
-            out: true,
+            user:'',
+            user2:'',
+            out: false, // this says if the user is logged in.
             email:'',
             uname: '',
             pass:'',
@@ -30,7 +31,8 @@ export default class App extends Component {
             editUser: {},
             toggleModal: false,
             showU: false,
-            username: '',
+            username1: '',
+            username2: '',
             email: '',
             password: '',
             togModal: false,
@@ -47,6 +49,7 @@ export default class App extends Component {
     newUserSubmit = async (event) => {
         console.log("new user submit clicked");
         event.preventDefault()
+        console.log(this.state.base + this.state.userURL + 'register');
         const url = this.state.base + this.state.userURL + 'register'
         try{
             const loginResponse = await fetch (url, {
@@ -101,7 +104,43 @@ export default class App extends Component {
                 this.setState({
                     user: parsedResponse.data,
                     out: true,
-                    numberOfUsers: 1,
+                    username1: parsedResponse.data.username,
+                })
+            }
+        }
+        catch(err){
+          console.log('Error => ', err);
+        }
+        //console.log(this.state.user)
+    }
+
+    // user 2
+    onLoginSubmit2 = async (event) => {
+        event.preventDefault()
+        if (event.target.email.value === '') {
+            alert('Fill out the form please')
+
+        }
+        const url = this.state.base + this.state.userURL + 'login'
+        try {
+            const response = await fetch (url, {
+                credentials: 'include',
+                method: 'POST',
+                body: JSON.stringify({
+                    email:    event.target.email.value,
+                    username: event.target.username.value,
+                    password: event.target.password.value,
+                }),
+                headers: {
+                    'Content-Type' : 'application/json'
+                }
+            })
+            const parsedResponse = await response.json()
+            console.log(parsedResponse.data)
+            if (response.status === 200) {
+                this.setState({
+                    user2: parsedResponse.data,
+                    out: true,
                 })
             }
         }
@@ -144,7 +183,7 @@ export default class App extends Component {
     }
 
     fetchInfo = () => {
-        //console.log('fetching dogs')
+        console.log(this.state.base + this.state.userURL);
         fetch(this.state.base + this.state.userURL, {
             credentials: 'include',
             method: 'GET',
@@ -258,27 +297,54 @@ export default class App extends Component {
         return (
             <div className={this.state.darkMode ? "DARKApp" : "App"}>
                 <div className={this.state.darkMode ? 'DARKnav' : "nav"}>
-                    <h1>Checkers</h1>
+                    <h1 className={this.state.darkMode ? 'DARKh1' : "h1"}>Checkers</h1>
                     <button onClick={this.toggle}>Darkmode</button>
-                    <button onClick={this.logOut}>Logout</button>
-                    <p className={this.state.darkMode ? "DARKun1" : "un1"}>Player 1:{this.state.user.username}</p>
+                    {this.state.out ?
+                        <div>
+                        <button onClick={this.logOut}>Logout</button>
+                        <p className={this.state.darkMode ? "DARKun1" : "un1"}>Player 1:{this.state.user.username}</p>
+                        <p className={this.state.darkMode ? "DARKun1" : "un1"}>Player 2:{this.state.user2.username}</p>
+                        </div>
+                        :
+
+                        <div></div>
+                    }
                 </div>
 
             { this.state.out ? <div>
 
-                <Board darkMode={this.state.darkMode}/>
-                <Chat darkMode={this.state.darkMode}/>
+
+                <div className="center">
+
+                <Board user={this.state.user.username}/>
+                <Chat  user={this.state.user.username} />
+                </div>
 
                 </div> :
-
-
-
 
                 <div className={this.state.darkMode ? "DARKallForms" :"allForms"}>
 
                 <div className={this.state.darkMode ? "DARKloginForm" :'loginForm'}>
-                    <h1>Login</h1>
+                    <h1>Login User: 1</h1>
                     <form className={this.state.darkMode ? "DARKforms":"forms"} onSubmit={this.onLoginSubmit}>
+                        <label>Email:</label>
+                        <input onChange={this.handleChange} name='email' ></input>
+                        <br></br>
+                        <label>Username:</label>
+                        <input name='username' onChange={this.handleChange} ></input>
+                        <br></br>
+                        <label>Password:</label>
+                        <input name='password' onChange={this.handleChange} type='password'></input>
+                        <br></br>
+                        <div className="s">
+                        <input className={this.state.darkMode? "DARKsubmit" :"submit"} type='submit' value='Login'></input>
+                        </div>
+                    </form>
+                </div>
+
+                <div className={this.state.darkMode ? "DARKloginForm2" :'loginForm2'}>
+                    <h1>Login User: 2</h1>
+                    <form className={this.state.darkMode ? "DARKforms":"forms"} onSubmit={this.onLoginSubmit2}>
                         <label>Email:</label>
                         <input onChange={this.handleChange} name='email' ></input>
                         <br></br>

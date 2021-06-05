@@ -1,3 +1,13 @@
+@@font-face {
+    font-family: FONT;
+    src: url(https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap);
+}
+.u {
+    background-color: rgba(0,0,0, 0.5);
+    color:white;
+}
+
+
 .App {
     text-align: center;
     margin: auto;
@@ -6,13 +16,24 @@
     background-size: cover;
     background-repeat: no-repeat;
 }
-h1 {
+.center {
+    margin:auto;
+}
+.h1 {
     font-size: 3em;
+    font-family: FONT;
 }
 
 .nav {
     background-color: rgba(255,0,0, 0.5);
     color:white;
+}
+.nav p {
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 250px;
 }
 .un1 {
     color:red;
@@ -169,8 +190,12 @@ background: red;
 /* =============================================*/
 .allForms{
     margin: auto;
-    margin-left: 100px;
+    margin-left: 30%;
     margin-top: 30px;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 700px;
 }
 .forms {
     display: flex;
@@ -197,17 +222,38 @@ background: red;
 }
 .loginForm {
     width: 500px;
-    height: 220px;
-    background-color: lightblue;
+    height: 250px;
+    background-image: url('user1.png');
     border-radius: 5px;
-    border: 3px solid blue;
+    border: 5px solid white;
     margin-bottom: 20px;
+    color: white;
 }
+.loginForm input:hover {
+    background-color: red;
+}
+.loginForm2 {
+    width: 500px;
+    height: 250px;
+    background-image: url('user2.png');
+    border-radius: 5px;
+    border: 5px solid white;
+    margin-bottom: 20px;
+    color: white;
+}
+.loginForm2 input:hover {
+    background-color: cyan;
+}
+
 .newUserForm {
     width: 500px;
-    background-color: lime;
+    background-image: url('user3.png');
     border-radius: 5px;
-    border: 3px solid green;
+    border: 5px solid white;
+    color: white;
+}
+.newUserForm input:hover {
+    background-color: lime;
 }
 .test {
     background-color: green;
@@ -220,7 +266,9 @@ button:hover {
     color: black;
 
 }
-
+label {
+    background-color: rgba(120,120,120, 0.6);
+}
 /* Dark mode ---------------------------------------------   dark mode  */
 /* Dark mode ---------------------------------------------   dark mode  */
 /* Dark mode ---------------------------------------------   dark mode  */
@@ -234,8 +282,19 @@ button:hover {
     background-repeat: no-repeat;
 }
 .DARKnav {
-    background-color: rgba(0,0,0, 0.6);
+    background-color: rgba(150,0,0, 0.6);
     color: darkred;
+}
+.DARKnav p {
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 250px;
+}
+.DARKh1 {
+    font-size: 3em;
+    color: black;
 }
 .DARKun1 {
     color: blue;
@@ -342,9 +401,8 @@ button:hover {
 
 .DARKallForms{
     margin: auto;
-    margin-left: 100px;
+    margin-left: 30%;
     margin-top: 30px;
-
 }
 .DARKforms {
     display: flex;
@@ -375,15 +433,35 @@ button:hover {
 .DARKloginForm {
     width: 500px;
     height: 220px;
-    background-color: lightblue;
+    background-color: black;
     border-radius: 5px;
-    border: 3px solid blue;
+    border: 3px solid grey;
     margin-bottom: 20px;
+}
+.DARKloginForm input:hover {
+    background-color: darkred;
+}
+
+.DARKloginForm2 {
+    width: 500px;
+    height: 220px;
+    background-color: black;
+    border-radius: 5px;
+    border: 3px solid grey;
+    margin-bottom: 20px;
+}
+.DARKloginForm2 input:hover {
+    background-color: darkblue;
 }
 
 .DARKnewUserForm {
     width: 500px;
-    background-color: lime;
+    background-color: slategrey;
     border-radius: 5px;
-    border: 3px solid green;
+    border: 3px solid black;
+    color: black;
+}
+.DARKnewUserForm input:hover {
+    background-color: darkgreen;
+
 }

@@ -1,17 +1,19 @@
 import './App.css';
 import React, { useState, useEffect, useRef } from 'react'
 import io from 'socket.io-client'
+
 // socketIO
-const ENDPOINT = "http://localhost:8000";
+if (NODE_ENV === 'development') {
+    const ENDPOINT = "http://localhost:8000"
+} else {
+    const ENDPOINT = 'https://back-end-444.herokuapp.com/'
+}
 const socket = io.connect(ENDPOINT)
-//const socket = io(ENDPOINT)
-
-
 
 const Chat = (props) => {
-    const [messages, setMessages] = useState(["~~Say Hello to your opponent~~"])
+    const [messages, setMessages] = useState(['Lets play!'])
     const [message, setMessage] = useState('')
-    const [user, setUser] = useState(props.name)
+
 
     const getMessages = () => { // this will place the game board in place?
         socket.on('message', msg => {
@@ -51,10 +53,11 @@ const Chat = (props) => {
         <div className="chat">
 
             <div className="chatbox">
+                <div>Say Hello!</div>
             {messages.length > 0 &&
             messages.map((msg, index) => (
                 <div key={index} className="text">
-                    <p className={"p1"}>{user}-{msg}</p>
+                    <p className={"p1"}>{msg}</p>
                 </div>
                 ))}
                 <div ref={messagesEndRef} />

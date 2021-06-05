@@ -47,6 +47,9 @@ const fillPieces = () => {
     }))
 }
 
+
+
+
 const getNextMove = (index, i) => {
     let x
     if (index < 7){
