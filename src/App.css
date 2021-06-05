@@ -94,7 +94,7 @@
 }
 /* board */
 .NEWblack {
-    background-color: lime;
+    background-color: darkorange;
     height: 60px;
     width: 60px;
     text-align: center;
@@ -109,7 +109,7 @@
 }
 /* board */
 .NEWred {
-    background-color: cyan;
+    background-color: blue;
     color: black;
     height: 60px;
     width: 60px;
@@ -127,7 +127,7 @@
     margin: 4px;
 }
 .NEWplayer1 {
-    background-color: lime;
+    background-color: blue;
     color:black;
     border-radius: 50%;
     border: 2px solid white;
@@ -147,7 +147,7 @@
     margin: 4px;
 }
 .NEWplayer2 {
-    background-color: cyan;
+    background-color: darkorange;
     color:black;
     border-radius: 50%;
     border: 2px solid white;
