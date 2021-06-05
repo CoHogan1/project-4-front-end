@@ -3,11 +3,14 @@ import React, { useState, useEffect, useRef } from 'react'
 import io from 'socket.io-client'
 
 // socketIO
-if (NODE_ENV === 'development') {
-    const ENDPOINT = "http://localhost:8000"
+let ENDPOINT = ''
+
+if (process.env.NODE_ENV === 'development') {
+  ENDPOINT = 'http://localhost:8000/'
 } else {
-    const ENDPOINT = 'https://back-end-444.herokuapp.com/'
+  ENDPOINT = "https://back-end-444.herokuapp.com/"
 }
+
 const socket = io.connect(ENDPOINT)
 
 const Chat = (props) => {
