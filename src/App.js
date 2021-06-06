@@ -21,7 +21,7 @@ export default class App extends Component {
             userURL: 'api/v1/users/',
             user:'',
             user2:'',
-            out: false, // this says if the user is logged in.
+            out: true, // this says if the user is logged in.
             email:'',
             uname: '',
             pass:'',
