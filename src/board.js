@@ -66,7 +66,7 @@ export default class Board extends Component {
     //===================================================Board movement=========
     mouseDown = (index, i) => {
         //console.log(`${index}, ${i}, start pos ${this.state.player}`)
-        let playerNum = this.state.board[index][i] // chose player number
+        let playerNum = this.state.board[index][i] // chose player number // eithe 1, 2 for nor or 5, 6 for kings
         this.setState({
             firstStart: index,
             firstEnd: i,
@@ -80,12 +80,16 @@ export default class Board extends Component {
             console.log("Game over")
             if (this.state.oneLeft === 0){
                 this.setState({
-                    board: gameBoard
+                    board: gameBoard,
+                    oneLeft: 12,
+                    twoLeft: 12,
                 })
                 return alert("Player 2 wins!")
             } else {
                 this.setState({
-                    board: gameBoard
+                    board: gameBoard,
+                    oneLeft: 12,
+                    twoLeft: 12,
                 })
                 return alert("Player 1 wins!")
             }
@@ -108,13 +112,14 @@ export default class Board extends Component {
             })
 
         } else {// square is occupied, check jump square to see if jummp possible.
-            if (this.state.player === 1){ // player 1 movement is diff
+            if (this.state.player === 1){ // player 1 movement is diff // or king piece number
                 if (i === this.state.firstEnd + 1) {// player is jumping right
                     console.log("player 1 jump right") // end pos == secS +1 secE +1
-                    if (this.state.board[index + 1][i +1] !== 1 && this.state.board[index + 1][i +1] !== 2) {
+                    if (this.state.board[index + 1][i +1] !== 1 && this.state.board[index + 1][i +1] !== 2) { // or king pieces
                         copyBoard[this.state.firstStart][this.state.firstEnd] = 4 // remove start player
                         copyBoard[index][i] = 4 // remove jumped char
                         copyBoard[index + 1][i +1] = this.state.player // set end  pos to char
+
                         this.setState({
                             board: copyBoard,
                             twoLeft: this.state.twoLeft -1,
@@ -122,25 +127,28 @@ export default class Board extends Component {
                     }
                 } else {// player is jumping left
                     console.log("player 1 jump left")
-                    if (this.state.board[index + 1][i - 1] !== 1 && this.state.board[index + 1][i - 1] !== 2) {
+                    if (this.state.board[index + 1][i - 1] !== 1 && this.state.board[index + 1][i - 1] !== 2) { // or king pieces
                         copyBoard[this.state.firstStart][this.state.firstEnd] = 4 // remove start player
                         copyBoard[index][i] = 4 // remove jumped char
                         copyBoard[index + 1][i - 1] = this.state.player // set end  pos to char
+
                         this.setState({
                             board: copyBoard,
                             twoLeft: this.state.twoLeft -1,
                         })
                     }
                 }
-            } else { // this.state.player === 2
+            } else if (this.state.player === 2){ // this.state.player === 2
                 if (i === this.state.firstEnd - 1) {
                     console.log("p2 moving left")
-                    if(this.state.board[index -1 ][i -1] !== 1 && this.state.board[index -1][i -1] !== 2) {
+                    if(this.state.board[index -1 ][i -1] !== 1 && this.state.board[index -1][i -1] !== 2) { // or king pieces
                         // square is empty allow jump
                         console.log("jumping left")
                         copyBoard[this.state.firstStart][this.state.firstEnd] = 4 // remove start player
                         copyBoard[index][i] = 4 // remove jumped char
+
                         copyBoard[index - 1][i - 1] = this.state.player
+
                         this.setState({
                             board: copyBoard,
                             oneLeft: this.state.oneLeft - 1
@@ -150,11 +158,13 @@ export default class Board extends Component {
                     }
                 } else {
                     // moving right
-                    if(this.state.board[index -1][i +1] !== 1 && this.state.board[index -1][i +1] !== 2){
+                    if(this.state.board[index -1][i +1] !== 1 && this.state.board[index -1][i +1] !== 2){ // or king pieces
                         console.log("p2 jumping right")
                         copyBoard[this.state.firstStart][this.state.firstEnd] = 4 // remove start player
                         copyBoard[index][i] = 4 // remove jumped char
+
                         copyBoard[index - 1][i +1] = this.state.player
+
                         this.setState({
                             board:copyBoard,
                             oneLeft: this.state.oneLeft - 1
@@ -163,12 +173,12 @@ export default class Board extends Component {
                         return alert("incorrect move")
                     }
                 }
+            } else {
+                console.log("this.state.player is reading something weird..")
+                console.log(this.state.player)
             }
-
         }
-
     }
-
 
     sendMove = () => {
         if (this.state.secondEnd === '') {
@@ -209,13 +219,17 @@ export default class Board extends Component {
                     {
                         this.state.board.map((row, index) => row.map((square, i) => {
                         if (square === 0){
-                            return     <div key={index + " " + i} className={this.state.colors ? "NEWred" :"red"}></div>
+                            return     <div key={index + " " + i} className={this.state.colors ?  "NEWred" : "red"  }></div>
                         } else {
                             if (square === 1) {
                                 return <div key={index + " " + i} className={this.state.colors ? "NEWblack" :"black"} onMouseUp={()=> this.mouseUp(index, i)}><div key={'red'}   onMouseDown={()=> this.mouseDown(index, i)} className={this.state.colors ? "NEWplayer1" : "player1"}></div></div>
                             } else if (square === 2) {
                                 return <div key={index + " " + i} className={this.state.colors ? "NEWblack" :"black"} onMouseUp={()=> this.mouseUp(index, i)}><div key={'black'} onMouseDown={()=> this.mouseDown(index, i)} className={this.state.colors ? "NEWplayer2" : "player2"}></div></div>
-                            } else {
+                            } else if (square === 5){
+                                return <div key={index + " " + i} className={this.state.colors ? "NEWblack" :"black"} onMouseUp={()=> this.mouseUp(index, i)}><div key={'black'} onMouseDown={()=> this.mouseDown(index, i)} className={this.state.colors ?  "NEWking1"  :  "king1" }></div></div>
+                            }else if ( square === 6){
+                                return <div key={index + " " + i} className={this.state.colors ? "NEWblack" :"black"} onMouseUp={()=> this.mouseUp(index, i)}><div key={'black'} onMouseDown={()=> this.mouseDown(index, i)} className={this.state.colors ?  "NEWking2"  :  "king2" }></div></div>
+                            }else {
                                 return <div key={index + " " + i} className={this.state.colors ? "NEWblack" :"black"} onMouseUp={()=> this.mouseUp(index, i)}></div>
                             }
                         }

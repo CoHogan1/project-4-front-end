@@ -85,6 +85,7 @@
     margin-left: 25%;
 }
 
+/* board */
 .black {
     background-color: black;
     height: 60px;
@@ -92,7 +93,6 @@
     text-align: center;
     margin: 1px;
 }
-/* board */
 .NEWblack {
     background-color: darkorange;
     height: 60px;
@@ -107,7 +107,6 @@
     width: 60px;
     margin: 1px;
 }
-/* board */
 .NEWred {
     background-color: blue;
     color: black;
@@ -115,7 +114,7 @@
     width: 60px;
     margin: 1px;
 }
-/* game peices */
+/* game peices *******************88*/
 
 .player1 {
     background-color: red;
@@ -156,6 +155,31 @@
     line-height: 45px;
     margin: 4px;
 }
+.king1 {
+    background-color: gold;
+    border-radius: 50%;
+    border: 2px solid red;
+}
+.king2 {
+    background-color: silver;
+    border-radius: 50%;
+    border: 2px solid grey;
+}
+.NEWking1 {
+    background-color: purple;
+    border-radius: 50%;
+    border: 2px solid green;
+}
+.NEWking2 {
+    background-color: cyan;
+    border-radius: 50%;
+    border: 2px solid yellow;
+}
+
+
+
+
+/*  end game pieces */
 .board {
     display: flex;
     flex-direction: row;
