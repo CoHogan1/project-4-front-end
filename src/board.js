@@ -65,7 +65,7 @@ export default class Board extends Component {
 
     //===================================================Board movement=========
     mouseDown = (index, i) => {
-        console.log(`${index}, ${i}, start pos ${this.state.player}`)
+        //console.log(`${index}, ${i}, start pos ${this.state.player}`)
         let playerNum = this.state.board[index][i] // chose player number
         this.setState({
             firstStart: index,
@@ -75,7 +75,7 @@ export default class Board extends Component {
     }
 
     mouseUp = (index, i) => {
-        console.log(`${index}, ${i}, end pos ${this.state.player}`)
+        //console.log(`${index}, ${i}, end pos ${this.state.player}`)
         if (this.state.oneLeft === 0 || this.state.twoLeft === 0 ){
             console.log("Game over")
             if (this.state.oneLeft === 0){
@@ -87,7 +87,7 @@ export default class Board extends Component {
                 this.setState({
                     board: gameBoard
                 })
-                return alert("Player 1 wins!")                
+                return alert("Player 1 wins!")
             }
         }
         let copyBoard = [...this.state.board] // define now and not in every statement
@@ -117,6 +117,7 @@ export default class Board extends Component {
                         copyBoard[index + 1][i +1] = this.state.player // set end  pos to char
                         this.setState({
                             board: copyBoard,
+                            twoLeft: this.state.twoLeft -1,
                         })
                     }
                 } else {// player is jumping left
@@ -127,6 +128,7 @@ export default class Board extends Component {
                         copyBoard[index + 1][i - 1] = this.state.player // set end  pos to char
                         this.setState({
                             board: copyBoard,
+                            twoLeft: this.state.twoLeft -1,
                         })
                     }
                 }
@@ -141,6 +143,7 @@ export default class Board extends Component {
                         copyBoard[index - 1][i - 1] = this.state.player
                         this.setState({
                             board: copyBoard,
+                            oneLeft: this.state.oneLeft - 1
                         })
                     } else {
                         return alert('invalid move')
@@ -154,7 +157,10 @@ export default class Board extends Component {
                         copyBoard[index - 1][i +1] = this.state.player
                         this.setState({
                             board:copyBoard,
+                            oneLeft: this.state.oneLeft - 1
                         })
+                    } else {
+                        return alert("incorrect move")
                     }
                 }
             }
