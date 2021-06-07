@@ -9,7 +9,6 @@ if (process.env.NODE_ENV === 'development') {
 } else {
   ENDPOINT = "https://back-end-444.herokuapp.com/"
 }
-
 const socket = io.connect(ENDPOINT)
 
 const gameBoard = [
@@ -33,10 +32,11 @@ export default class Board extends Component {
                 secondStart: '',
                 secondEnd: '',
                 move: false,
-                playerMove: [],
                 colors: false,
                 dark: this.props.darkMode,
                 player: 1,
+                oneLeft: 12,
+                twoLeft: 12,
             }
         }
 
@@ -66,8 +66,7 @@ export default class Board extends Component {
     //===================================================Board movement=========
     mouseDown = (index, i) => {
         console.log(`${index}, ${i}, start pos ${this.state.player}`)
-        let playerNum = this.state.board[index][i]
-        //console.log(playerNum, " 1 is red, 2 is grey") // chose the player
+        let playerNum = this.state.board[index][i] // chose player number
         this.setState({
             firstStart: index,
             firstEnd: i,
@@ -75,17 +74,33 @@ export default class Board extends Component {
         })
     }
 
-
     mouseUp = (index, i) => {
         console.log(`${index}, ${i}, end pos ${this.state.player}`)
+        if (this.state.oneLeft === 0 || this.state.twoLeft === 0 ){
+            console.log("Game over")
+            if (this.state.oneLeft === 0){
+                this.setState({
+                    board: gameBoard
+                })
+                return alert("Player 2 wins!")
+            } else {
+                this.setState({
+                    board: gameBoard
+                })
+                return alert("Player 1 wins!")                
+            }
+        }
         let copyBoard = [...this.state.board] // define now and not in every statement
         this.setState({
             secondStart: index,
             secondEnd: i,
-        })
+        }) // cannot access these variables in this function.
+
         if (this.state.board[index][i] !== 1 && this.state.board[index][i] !== 2) {
-            //console.log(this.state.board[index][i])
             // square is empty allow piece to move.
+            if (index > this.state.firstStart + 1 || index < this.state.firstStart - 1 || index === this.state.firstStart){
+                return alert('Invalid move ;)')
+            }
             copyBoard[this.state.firstStart][this.state.firstEnd] = 4
             copyBoard[index][i] = this.state.player // new square is now player
             this.setState({
@@ -94,8 +109,8 @@ export default class Board extends Component {
 
         } else {// square is occupied, check jump square to see if jummp possible.
             if (this.state.player === 1){ // player 1 movement is diff
-                if (this.state.secondEnd === this.state.firstEnd + 1) {// player is jumping right
-                    console.log("right") // end pos == secS +1 secE +1
+                if (i === this.state.firstEnd + 1) {// player is jumping right
+                    console.log("player 1 jump right") // end pos == secS +1 secE +1
                     if (this.state.board[index + 1][i +1] !== 1 && this.state.board[index + 1][i +1] !== 2) {
                         copyBoard[this.state.firstStart][this.state.firstEnd] = 4 // remove start player
                         copyBoard[index][i] = 4 // remove jumped char
@@ -105,7 +120,7 @@ export default class Board extends Component {
                         })
                     }
                 } else {// player is jumping left
-                    console.log("left")
+                    console.log("player 1 jump left")
                     if (this.state.board[index + 1][i - 1] !== 1 && this.state.board[index + 1][i - 1] !== 2) {
                         copyBoard[this.state.firstStart][this.state.firstEnd] = 4 // remove start player
                         copyBoard[index][i] = 4 // remove jumped char
@@ -116,10 +131,11 @@ export default class Board extends Component {
                     }
                 }
             } else { // this.state.player === 2
-                if (this.state.secondEnd === this.state.firstEnd - 1) {
-                    console.log("moving left")
+                if (i === this.state.firstEnd - 1) {
+                    console.log("p2 moving left")
                     if(this.state.board[index -1 ][i -1] !== 1 && this.state.board[index -1][i -1] !== 2) {
                         // square is empty allow jump
+                        console.log("jumping left")
                         copyBoard[this.state.firstStart][this.state.firstEnd] = 4 // remove start player
                         copyBoard[index][i] = 4 // remove jumped char
                         copyBoard[index - 1][i - 1] = this.state.player
@@ -132,7 +148,7 @@ export default class Board extends Component {
                 } else {
                     // moving right
                     if(this.state.board[index -1][i +1] !== 1 && this.state.board[index -1][i +1] !== 2){
-                        console.log("moving right")
+                        console.log("p2 jumping right")
                         copyBoard[this.state.firstStart][this.state.firstEnd] = 4 // remove start player
                         copyBoard[index][i] = 4 // remove jumped char
                         copyBoard[index - 1][i +1] = this.state.player

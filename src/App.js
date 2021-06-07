@@ -183,7 +183,7 @@ export default class App extends Component {
     }
 
     fetchInfo = () => {
-        console.log(this.state.base + this.state.userURL);
+        //console.log(this.state.base + this.state.userURL);
         fetch(this.state.base + this.state.userURL, {
             credentials: 'include',
             method: 'GET',

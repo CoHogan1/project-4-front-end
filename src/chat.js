@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === 'development') {
 } else {
   ENDPOINT = "https://back-end-444.herokuapp.com/"
 }
-console.log(ENDPOINT);
+console.log(ENDPOINT)
 
 const socket = io.connect(ENDPOINT)
 
