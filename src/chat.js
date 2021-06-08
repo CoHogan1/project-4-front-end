@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === 'development') {
 } else {
   ENDPOINT = "https://back-end-444.herokuapp.com/"
 }
-console.log(ENDPOINT, "This is the end point youre trying to hit")
+console.log(ENDPOINT, "This is the end point youre trying to hit chat.js")
 
 const socket = io.connect(ENDPOINT)
 

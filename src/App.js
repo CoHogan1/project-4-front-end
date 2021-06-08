@@ -11,6 +11,7 @@ if (process.env.NODE_ENV === 'development') {
 } else {
   BASEURL = "https://back-end-444.herokuapp.com/"
 }
+console.log(BASEURL, " this the url from app.js")
 
 export default class App extends Component {
     constructor(props){

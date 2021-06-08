@@ -11,6 +11,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 const socket = io.connect(ENDPOINT)
 
+console.log(ENDPOINT, " this is the url from board.js")
+
 const gameBoard = [
   [0, 1, 0, 1, 0, 1, 0, 1],
   [1, 0, 1, 0, 1, 0, 1, 0],
