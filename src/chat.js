@@ -10,7 +10,7 @@ import io from 'socket.io-client'
 // } else {
 //   ENDPOINT = "https://back-end-444.herokuapp.com/"
 // }
-const ENDPOINT = "https://back-end-444.herokuapp.com/"
+const ENDPOINT = "http://back-end-444.herokuapp.com/"
 
 console.log(ENDPOINT, "This is the end point youre trying to hit chat.js")
 

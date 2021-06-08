@@ -12,7 +12,7 @@ import Board from './board'
 //   BASEURL = "https://back-end-444.herokuapp.com/"
 // }
 
-const BASEURL = "https://back-end-444.herokuapp.com/"
+const BASEURL = "http://back-end-444.herokuapp.com/"
 
 console.log(BASEURL, " this the url from app.js")
 
