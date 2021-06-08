@@ -4,13 +4,16 @@ import React, { Component } from 'react'
 import Chat from './chat'
 import Board from './board'
 
-let BASEURL = ''
+// let BASEURL = ''
+//
+// if (process.env.NODE_ENV === 'development') {
+//   BASEURL = 'http://localhost:8000/'
+// } else {
+//   BASEURL = "https://back-end-444.herokuapp.com/"
+// }
 
-if (process.env.NODE_ENV === 'development') {
-  BASEURL = 'http://localhost:8000/'
-} else {
-  BASEURL = "https://back-end-444.herokuapp.com/"
-}
+const BASEURL = "https://back-end-444.herokuapp.com/"
+
 console.log(BASEURL, " this the url from app.js")
 
 export default class App extends Component {
