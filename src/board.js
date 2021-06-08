@@ -9,7 +9,7 @@ import io from 'socket.io-client'
 // } else {
 //   ENDPOINT = "https://back-end-444.herokuapp.com/"
 // }
-const ENDPOINT = "http://back-end-444.herokuapp.com/"
+const ENDPOINT = "https://back-end-444.herokuapp.com/"
 
 const socket = io.connect(ENDPOINT)
 
