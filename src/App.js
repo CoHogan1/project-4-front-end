@@ -4,6 +4,8 @@ import React, { Component } from 'react'
 import Chat from './chat'
 import Board from './board'
 
+// this is for local
+
 // let BASEURL = ''
 //
 // if (process.env.NODE_ENV === 'development') {
@@ -12,6 +14,7 @@ import Board from './board'
 //   BASEURL = "https://back-end-444.herokuapp.com/"
 // }
 
+// this is for heroku
 const BASEURL = "https://back-end-444.herokuapp.com/"
 
 console.log(BASEURL, " this the url from app.js")
@@ -25,7 +28,7 @@ export default class App extends Component {
             userURL: 'api/v1/users/',
             user:'',
             user2:'',
-            out: true, // this says if the user is logged in.
+            out: false, // this says if the user is logged in.
             email:'',
             uname: '',
             pass:'',

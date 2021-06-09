@@ -2,7 +2,7 @@ import './App.css';
 import React, { useState, useEffect, useRef } from 'react'
 import io from 'socket.io-client'
 
-// socketIO
+// this is for loacal
 // let ENDPOINT
 //
 // if (process.env.NODE_ENV === 'development') {
@@ -10,6 +10,8 @@ import io from 'socket.io-client'
 // } else {
 //   ENDPOINT = "https://back-end-444.herokuapp.com/"
 // }
+
+// this is for heroku
 const ENDPOINT = "https://back-end-444.herokuapp.com/"
 
 console.log(ENDPOINT, "This is the end point youre trying to hit chat.js")

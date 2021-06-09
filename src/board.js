@@ -2,13 +2,18 @@ import './App.css';
 import React, { Component } from 'react'
 import io from 'socket.io-client'
 // socketIO
-//let ENDPOINT
 
+// for local
+// let ENDPOINT
+//
 // if (process.env.NODE_ENV === 'development') {
 //   ENDPOINT = 'http://localhost:8000/'
 // } else {
 //   ENDPOINT = "https://back-end-444.herokuapp.com/"
 // }
+
+
+// for heroku
 const ENDPOINT = "https://back-end-444.herokuapp.com/"
 
 const socket = io.connect(ENDPOINT)

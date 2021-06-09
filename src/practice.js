@@ -72,3 +72,12 @@ const getNextMove = (index, i) => {
 }
 
 //getNextMove(7,7)
+
+
+
+//websocket.js:189 WebSocket connection to
+//'wss://back-end-444.herokuapp.com/socket.io/?EIO=4&transport=websocket&sid=mZfXf-mtZUXs4VbtAAAO'
+//failed: WebSocket is closed before the connection is established.
+
+
+//  web: gunicorn app:app
